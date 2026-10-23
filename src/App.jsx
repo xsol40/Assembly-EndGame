@@ -1,7 +1,12 @@
 import React from "react"
+import languages from "./language.js"
 
 
 export default function App(){
+    const languageChip = languages.map((lang) => (
+        <span className="chip" key={lang}>{lang}</span>
+    ))
+
     return (
         <main>
             <header>
@@ -12,6 +17,7 @@ export default function App(){
                 <h1>You Win!</h1>
                 <p>Well done!</p>
             </section>
+            <section className="chips">{languageChip}</section>
         </main>
     )
 }
