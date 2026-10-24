@@ -2,7 +2,19 @@ import React from "react"
 import languages from "./language.js"
 
 
+function WordDisplay(){
+    const [currentWord, setCurrentWord] = React.useState('React')
+    
+    return (
+        currentWord.split('').map((char, index) => (
+        <span key={index}>{char.toUpperCase()}</span>
+       ))
+    );
+}
+
 export default function App(){
+    
+
     const languageChip = languages.map((lang) => (
         <span className="chip" key={lang}>{lang}</span>
     ))
@@ -18,6 +30,9 @@ export default function App(){
                 <p>Well done!</p>
             </section>
             <section className="chips">{languageChip}</section>
+            <div className="word">
+                <WordDisplay />
+            </div>
         </main>
     )
 }

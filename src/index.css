@@ -76,3 +76,24 @@ section.status {
   background: #000;
   color: #e6ecf8;
 }
+
+.word {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 32px 0;
+}
+
+.word span {
+  width: 42px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: #e6ecf8;
+  background: #1b2540;
+  border-bottom: 3px solid #7aa2ff;
+  border-radius: 4px 4px 0 0;
+}
