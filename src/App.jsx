@@ -1,6 +1,8 @@
 import React from "react"
 import languages from "./language.js"
 import { clsx } from 'clsx';
+import {getFarewellText} from './utils.js'
+
 
 function WordDisplay({ currentWord, guessedLetters }){
     
@@ -16,7 +18,7 @@ function WordDisplay({ currentWord, guessedLetters }){
 
 export default function App(){
     // state
-    const [currentWord, setCurrentWord] = React.useState('React')
+    const [currentWord, setCurrentWord] = React.useState('react')
     const [guessedLetters, setGuessedLetters] = React.useState([])
     
     // drived value 
@@ -25,13 +27,37 @@ export default function App(){
     ).length
     
     const isGameWon = 
-        currentWord.split("").every(letter => guessedLetters.includes(letter))
+        currentWord.toLowerCase().split("").every(letter => guessedLetters.includes(letter))
     const isGameLost = wrongGuessCount >= languages.length - 1
     const isGameOver = isGameWon || isGameLost
+    const lastGuessLetter = guessedLetters[guessedLetters.length - 1];
+    const isLastGuessIncorrect = lastGuessLetter && !currentWord.includes(lastGuessLetter)
     // Static Value    
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-    console.log(wrongGuessCount)
+    const isFarewell = !isGameOver && isLastGuessIncorrect
+    function renderStatus() {
+        if (isFarewell) {
+            return <p>{getFarewellText(languages[wrongGuessCount - 1])}</p>
+        }
+        if (isGameWon) {
+            return (
+                <>
+                    <h2>You Win!</h2>
+                    <p>Well done!</p>
+                </>
+            )
+        }
+        if (isGameLost) {
+            return (
+                <>
+                    <h2>Game over!</h2>
+                    <p>You lose! Better start learning Assembly 😭</p>
+                </>
+            )
+        }
+        return null
+    }
 
     function addGuessedLetter(letter){
         setGuessedLetters(prev => (
@@ -83,10 +109,15 @@ export default function App(){
                 <h1>Assembly: Endgame</h1>
                 <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
             </header>
-            <section className="status">
-                <h1>You Win!</h1>
-                <p>Well done!</p>
-            </section>
+            {(isGameOver || isFarewell) && (                       
+                <section className={clsx("status", {
+                    won: isGameWon,
+                    lost: isGameLost,
+                    farewell: isFarewell                       
+                })}>
+                    {renderStatus()}
+                </section>
+            )}
             <section className="chips">{languageChip}</section>
             <div className="word">
                 <WordDisplay 

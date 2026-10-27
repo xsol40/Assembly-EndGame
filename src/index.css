@@ -11,6 +11,12 @@ body {
   text-align: center;
 }
 
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 header {
     text-align: center;
 }
@@ -38,6 +44,8 @@ section.status {
   margin: 28px auto;
   padding: 16px 20px;
   display: flex;
+  width: 100%;
+  max-width: 350px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -45,6 +53,60 @@ section.status {
   border: 1px solid #3f8f63;
   border-radius: 8px;
 }
+.status {
+  max-width: 420px;
+  margin: 28px auto;
+  padding: 16px 20px;
+  border-radius: 8px;
+}
+
+.status h2 {
+  margin: 0 0 6px;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.status p {
+  margin: 0;
+}
+
+.status.farewell {
+  background: #041a55;
+  border: 1px solid #2a3a5c;
+  border-left: 4px solid #b29b78;
+  border-radius: 6px;
+  text-align: left;
+  animation: slideIn 0.35s ease;
+}
+
+.status.farewell p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #e6ecf8;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* win */
+.status.won {
+  background: #12301f;
+  border: 1px solid #3f8f63;
+}
+.status.won h2 { color: #7be0a4; }
+.status.won p  { color: #b8e6cb; }
+
+/* game over */
+.status.lost {
+  background: #301216;
+  border: 1px solid #8f3f4a;
+}
+.status.lost h2 { color: #e07b8a; }
+.status.lost p  { color: #e6b8bf; }
 
 .status h1 {
   line-height: 1.2;
